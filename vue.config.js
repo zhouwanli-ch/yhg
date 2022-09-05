@@ -1,4 +1,4 @@
 module.exports = {
-    publicPath: './', //这里
-    outputDir: 'nobug',
+    publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+    outputDir: process.env.VUE_APP_OUTPUT_DIR || 'dist',
 }

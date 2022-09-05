@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      aa: process.env.NODE_ENV,
+      aa: process.env.VUE_APP_OUTPUT_DIR,
     };
   },
   mounted() {
