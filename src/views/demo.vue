@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <HelloWorld :msg="aa" />
   </div>
 </template>
 
@@ -13,8 +13,13 @@ export default {
   components: {
     HelloWorld,
   },
+  data() {
+    return {
+      aa: process.env.NODE_ENV,
+    };
+  },
   mounted() {
-    console.log(456465, process.env.VUE_APP_IMAGE_URL);
+    console.log(456465, process.env);
   },
 };
 </script>
