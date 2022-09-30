@@ -1,11 +1,10 @@
 <template>
   <div class="home">
-    <HelloWorld :msg="aa + '好aaa'" />
+    <HelloWorld :msg="aa + '好了'" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
@@ -19,7 +18,17 @@ export default {
     };
   },
   mounted() {
-    console.log(456465, process.env);
+    this.getaboutustable()
+  },
+  methods: {
+    getaboutustable() {
+      this.$api.systemManage
+        .getaboutustable({})
+        .then((data) => {
+          console.log(data);
+        })
+        .finally(() => {});
+    },
   },
 };
 </script>

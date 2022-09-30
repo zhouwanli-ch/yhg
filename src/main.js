@@ -1,72 +1,37 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
 import store from './store'
-import Axios from 'axios'
+import router from './router'
+import './router/permission' // 添加路由守卫
+import Filters from './utils/filters' // 导入全部过滤器
+import * as Methods from './utils/filters/methods' // 导入全部过滤器方法
+import dictionaries from './utils/dictionaries' // 获取字典的方法
+import Components from './components'
+import Api from './api' // 导入全部api服务
+import EventBus from './utils/EventBus' // 事件总程
+// import loading from './components/loading'
+import * as util from './utils/util'
+import * as validate from './utils/validate'
 
-Vue.config.productionTip = false
+// 挂载一些全局公共方法
+Vue.prototype.$app = {
+  // loading, // vue实例绑定 全局单例loading （注: .$loading 是elementUI 保留属性，所以用$load代替绑定实例）
+  util, // 公共工具函数库
+  validate, // 公共验证函数库
+  filters: Methods, // 全部过滤器方法
+  dictionaries // 注册获取字典的方法
+}
 
-const eggUrl = 'https://www.tagewangluo.com:7001'
-Vue.prototype.baseURL = eggUrl
-Vue.prototype.$api = Axios.create({
-  baseURL: eggUrl,
-});
+Vue.prototype.$EventBus = EventBus // 把事件总程挂载都全局实例中
 
-let cancel,
-  promiseArr = {};
-//请求拦截器
-Vue.prototype.$api.interceptors.request.use(
-  config => {
-    // 调试的时候直接修改token值
-    let token = null;
-    // console.log(plus)
-    // console.log(localStorage.getItem('accessToken'))
-    // let tokenvalue = sessionStorage.getItem('username')
-    let tokenvalue = localStorage.getItem('accessToken')
-    if (tokenvalue === null) {
-      token = null
-    } else {
-      token = tokenvalue
-    }
+Vue.use(Filters) // 全局注册全部过滤器
+Vue.use(Components) // 全局注册全部自定义组件
+Vue.use(Api) // 全局注册全部api服务
 
-    if (!token || !/\S/.test(token)) {
-      //token = getToken();
-    }
-    //注入token
-    config.headers["Authorization"] = token;
+Vue.config.productionTip = false // 设置为 false 以阻止 vue 在启动时生成生产提示
 
-    //发起请求时，取消掉当前正在进行的相同请求
-    if (promiseArr[config.url]) {
-      promiseArr[config.url]('cancel');
-      promiseArr[config.url] = cancel;
-    } else {
-      promiseArr[config.url] = cancel;
-    }
-    return config;
-
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
-
-router.beforeEach((to, from, next) => {
-  /* 路由发生变化修改页面title */
-  if (to.meta.title) {
-    document.title = to.meta.title
-  }
-  next()
-})
-
-Vue.config.productionTip = false
-
-router.beforeEach(async (to, from, next) => {
-  localStorage.setItem("routertopath", to.path);
-  localStorage.setItem("routerfrompath", from.path);
-  next();
-});
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app')
