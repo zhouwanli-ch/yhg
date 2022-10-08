@@ -34,17 +34,16 @@ service.interceptors.request.use(async (config) => {
 
 // 配置响应拦截器
 service.interceptors.response.use((response) => {
-  console.log('响应拦截器', response,123)
   // 接收到响应数据并成功后的一些共有的处理，关闭loading等
   if (response.status !== 200) {
     return Promise.reject(new Error(response.message))
   } else {
     // 获取业务结果数据
     const {
-      data,
-      config
+      data
     } = response
-    console.log(data, config)
+    // console.log(response)
+    return Promise.resolve(data)
   }
 }, ({
   config,
