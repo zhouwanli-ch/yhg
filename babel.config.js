@@ -14,7 +14,14 @@ module.exports = {
         polyfills: ['es6.promise', 'es6.symbol']
       }
     ],
-    '@vue/babel-preset-jsx'
+    '@vue/babel-preset-jsx',
   ],
-  plugins: ['@babel/plugin-syntax-jsx']
+  plugins: [
+    '@babel/plugin-syntax-jsx',
+    ['import', {
+      libraryName: 'vant',
+      libraryDirectory: 'es',
+      style: true
+    }, 'vant']
+  ]
 }

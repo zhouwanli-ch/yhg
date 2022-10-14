@@ -14,6 +14,8 @@ import EventBus from './utils/EventBus' // 事件总程
 // import loading from './components/loading'
 import * as util from './utils/util'
 import * as validate from './utils/validate'
+import "./utils/vant" // 按需引入vant
+import "./assets/style/global.scss"
 
 // 挂载一些全局公共方法
 Vue.prototype.$app = {

@@ -1,0 +1,15 @@
+@function  vw($px){
+  @return ($px/1080)*100vw
+}
+*{
+  margin:0;
+  padding:0;
+}
+html, body,
+#app {
+  height: 100%;
+  // box-sizing:border-box;
+}
+ul{
+  list-style:none
+}

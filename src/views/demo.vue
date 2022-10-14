@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <HelloWorld :msg="aa + '好了'" />
+    <van-button type="primary">主要按钮</van-button>
   </div>
 </template>
 
@@ -18,7 +19,7 @@ export default {
     };
   },
   mounted() {
-    this.getaboutustable()
+    this.getaboutustable();
   },
   methods: {
     getaboutustable() {
