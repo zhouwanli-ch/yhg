@@ -1,4 +1,5 @@
 module.exports = {
+    transpileDependencies: ['*'], // 旧ie浏览器兼容
     publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
     // 打包生成文件名
     outputDir: process.env.VUE_APP_OUTPUT_DIR || 'dist',

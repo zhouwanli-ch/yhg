@@ -1,3 +1,5 @@
+import 'core-js' // 旧ie浏览器兼容
+import 'regenerator-runtime/runtime' // 旧ie浏览器兼容
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
